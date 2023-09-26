@@ -1,0 +1,407 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <script src="static/assets/js/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+  <title>大数据数据分析</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="static/assets/img/favicon.png" rel="icon">
+  <link href="static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="static/assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="static/assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="container">
+
+      <div class="logo float-left">
+        <h1 class="text-light"><a href="index.html"><span>dashuju</span></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav class="nav-menu float-right d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="/index">首页<i class="la la-angle-down"></i></a></li>
+          <li><a href="/movie">表格</a></li>
+          <li><a href="/score">图像</a></li>
+          <li><a href="/word">词云</a></li>
+          <li><a href="/team">团队</a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Our Team Section ======= -->
+  <section id="team" class="team">
+      <div class="container">
+
+          <div class="section-title">
+              <h2>可视化</h2>
+
+          </div>
+
+          <!-- ======= Counts Section ======= -->
+          <section class="counts section-bg">
+              <div id="main" style="width:80%;height:300px;"></div><br>
+              <div id="two" style="width:80%;height:300px;"></div><br>
+              <div id="three" style="width:80%;height:300px;"></div><br>
+              <div id="dt" style="width:80%;height:300px;"></div><br>
+              <div id="four" style="width:80%;height:300px;"></div><br>
+              <div id="five" style="width:80%;height:300px;"></div><br>
+              <div id="six" style="width:80%;height:300px;"></div><br>
+
+          </section><!-- End Counts Section -->
+
+      </div>
+  </section><!-- End Our Team Section -->
+
+  <script type="text/javascript">
+      var dom = document.getElementById("main");
+      var myChart = echarts.init(dom);
+      var app = {};
+      option = null;
+      option = {
+          color:['#3398DB'],
+          title: {
+              text: '岗位分类'
+          },
+          tooltip: {
+              trigger:'axis',
+              axisPointer:{
+                  type:'shadow'
+              }
+          },
+          grid:{
+              left:'6%',
+              right:'4%',
+              bottom:'3%',
+              containLabel: true,
+          },
+          xAxis: {
+              type: 'category',
+              data: {{score1|tojson}}
+          },
+          yAxis: {
+              type: 'value'
+          },
+          series: [{
+              data:{{ num1 }},
+              type: 'bar',
+              barWidth:'60%'
+          }]
+      };
+      ;
+      if (option && typeof option === "object") {
+          myChart.setOption(option, true);
+      }
+  </script>
+  <script type="text/javascript">
+      var dom = document.getElementById("two");
+      var myChart = echarts.init(dom);
+      var options = {
+        title: {
+        text: '岗位名称'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b}: {c} ({d}%)'
+        },
+      series: [
+        {
+          name: 'Data',
+          type: 'pie',
+          radius: '55%',
+          center: ['50%', '50%'],
+          data: [
+            {% for i in range(num2|length) %}
+              { value: {{ num2[i] }}, name: '{{ score2[i] }}' },
+            {% endfor %}
+          ],
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    };
+    myChart.setOption(options);
+  </script>
+  <script type="text/javascript">
+      var dom = document.getElementById("three");
+      var myChart = echarts.init(dom);
+      var app = {};
+      option = null;
+      option = {
+          color:['#3398DB'],
+          title: {
+              text: '薪资'
+          },
+          tooltip: {
+              trigger:'axis',
+              axisPointer:{
+                  type:'shadow'
+              }
+          },
+          grid:{
+              left:'6%',
+              right:'4%',
+              bottom:'3%',
+              containLabel: true,
+          },
+          xAxis: {
+              type: 'category',
+              data: {{score3|tojson}}
+          },
+          yAxis: {
+              type: 'value'
+          },
+          series: [{
+              data:{{ num3 }},
+              type: 'bar',
+              barWidth:'60%'
+          }]
+      };
+      ;
+      if (option && typeof option === "object") {
+          myChart.setOption(option, true);
+      }
+  </script>
+
+  <script type="text/javascript">
+  var dom = document.getElementById("dt");
+  var myChart = echarts.init(dom);
+  var app = {};
+  option = null;
+  option = {
+    tooltip: {
+      trigger: 'item',
+      formatter: '{b}: {c}'
+    },
+    visualMap: {
+      min: 0,
+      max: Math.max.apply(null, {{ num4|tojson }}),
+      text: ['High', 'Low'],
+      textStyle: {
+        color: '#fff'
+      },
+      realtime: false,
+      calculable: true,
+      inRange: {
+        color: ['#e0ffff', '#006edd']
+      }
+    },
+    series: [{
+      type: 'map',
+      map: 'china',
+      roam: false,
+      label: {
+        show: true,
+        color: '#000',
+        fontSize: 8
+      },
+      data: [
+        { name: '{{ score4[0] }}', value: {{ num4[0] }} },
+        { name: '{{ score4[1] }}', value: {{ num4[1] }} },
+        { name: '{{ score4[2] }}', value: {{ num4[2] }} },
+        { name: '{{ score4[3] }}', value: {{ num4[3] }} },
+        { name: '{{ score4[4] }}', value: {{ num4[4] }} },
+        { name: '{{ score4[5] }}', value: {{ num4[5] }} },
+        { name: '{{ score4[6] }}', value: {{ num4[6] }} },
+        { name: '{{ score4[7] }}', value: {{ num4[7] }} },
+        { name: '{{ score4[8] }}', value: {{ num4[8] }} },
+        { name: '{{ score4[9] }}', value: {{ num4[9] }} }
+      ]
+    }]
+  };
+  if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+  }
+</script>
+
+  <script type="text/javascript">
+      var dom = document.getElementById("four");
+      var myChart = echarts.init(dom);
+      var app = {};
+      option = null;
+      option = {
+          color:['#3398DB'],
+          title: {
+              text: '地址'
+          },
+          tooltip: {
+              trigger:'axis',
+              axisPointer:{
+                  type:'shadow'
+              }
+          },
+          grid:{
+              left:'6%',
+              right:'4%',
+              bottom:'3%',
+              containLabel: true,
+          },
+          xAxis: {
+              type: 'category',
+              data: {{score4|tojson}}
+          },
+          yAxis: {
+              type: 'value'
+          },
+          series: [{
+              data:{{ num4 }},
+              type: 'bar',
+              barWidth:'60%'
+          }]
+      };
+      ;
+      if (option && typeof option === "object") {
+          myChart.setOption(option, true);
+      }
+  </script>
+  <script type="text/javascript">
+      var dom = document.getElementById("five");
+      var myChart = echarts.init(dom);
+      var app = {};
+      option = null;
+      option = {
+          color:['#3398DB'],
+          title: {
+              text: '工作经验'
+          },
+          tooltip: {
+              trigger:'axis',
+              axisPointer:{
+                  type:'shadow'
+              }
+          },
+          grid:{
+              left:'6%',
+              right:'4%',
+              bottom:'3%',
+              containLabel: true,
+          },
+          xAxis: {
+              type: 'category',
+              data: {{score5|tojson}}
+          },
+          yAxis: {
+              type: 'value'
+          },
+          series: [{
+              data:{{ num5 }},
+              type: 'bar',
+              barWidth:'60%'
+          }]
+      };
+      ;
+      if (option && typeof option === "object") {
+          myChart.setOption(option, true);
+      }
+  </script>
+  <script type="text/javascript">
+      var dom = document.getElementById("six");
+      var myChart = echarts.init(dom);
+      var app = {};
+      option = null;
+      option = {
+          color:['#3398DB'],
+          title: {
+              text: '学历要求'
+          },
+          tooltip: {
+              trigger:'axis',
+              axisPointer:{
+                  type:'shadow'
+              }
+          },
+          grid:{
+              left:'6%',
+              right:'4%',
+              bottom:'3%',
+              containLabel: true,
+          },
+          xAxis: {
+              type: 'category',
+              data: {{score6|tojson}}
+          },
+          yAxis: {
+              type: 'value'
+          },
+          series: [{
+              data:{{ num6 }},
+              type: 'bar',
+              barWidth:'60%'
+          }]
+      };
+      ;
+      if (option && typeof option === "object") {
+          myChart.setOption(option, true);
+      }
+  </script>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Mamba</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+       More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="static/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="static/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="static/assets/vendor/php-email-form/validate.js"></script>
+  <script src="static/assets/vendor/jquery-sticky/jquery.sticky.js"></script>
+  <script src="static/assets/vendor/venobox/venobox.min.js"></script>
+  <script src="static/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="static/assets/vendor/counterup/counterup.min.js"></script>
+  <script src="static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="static/assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="static/assets/js/main.js"></script>
+
+<style>
+.copyrights{text-indent:-9999px;height:0;line-height:0;font-size:0;overflow:hidden;}
+</style>
+<div class="copyrights" id="links20210126">
+	Collect from <a href="http://www.cssmoban.com/"  title="网站模板">模板之家</a>
+	<a href="https://www.chazidian.com/"  title="查字典">查字典</a>
+</div>
+</body>
+
+</html>
